@@ -190,20 +190,31 @@ export default Home;
 // const Home = () => {
 //   const [products, setProducts] = useState([]);
 
+//   const API_URL =
+//     process.env.REACT_APP_API_URL ||
+//     process.env.VITE_API_URL ||
+//     "http://localhost:5000";
+
 //   useEffect(() => {
 //     const fetchProducts = async () => {
 //       try {
-//         const res = await fetch("http://localhost:5000/api/products");
+//         const res = await fetch(`${API_URL}/api/products`);
 //         const data = await res.json();
 
-//         setProducts(data);
+//         // attach full URL for images
+//         const formattedProducts = data.map((p) => ({
+//           ...p,
+//           image: `${API_URL}${p.image}`,
+//         }));
+
+//         setProducts(formattedProducts);
 //       } catch (error) {
 //         console.error("Error fetching products:", error);
 //       }
 //     };
 
 //     fetchProducts();
-//   }, []);
+//   }, [API_URL]);
 
 //   return (
 //     <div className="home-page">
@@ -212,12 +223,7 @@ export default Home;
 //         {products.map((p) => (
 //           <ProductCard
 //             key={p._id}
-//             product={{
-//               _id: p._id,
-//               name: p.name,
-//               price: p.price,
-//               image: p.image,
-//             }}
+//             product={p}
 //             onAddToCart={addToCart}
 //           />
 //         ))}
@@ -227,4 +233,5 @@ export default Home;
 // };
 
 // export default Home;
+
 

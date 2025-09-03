@@ -1,38 +1,41 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../context/AuthContext"; 
+import { AuthContext } from "../context/AuthContext";
 
 const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
-    const { user, token } = useContext(AuthContext);
-
-
+    const { user } = useContext(AuthContext);
+    console.log(user)
     useEffect(() => {
         const fetchOrders = async () => {
             try {
                 const { data } = await axios.get(
-                    user.isAdmin
-                        ? "http://localhost:5000/api/orders" 
-                        : "http://localhost:5000/api/orders", 
+                    "http://localhost:5000/api/orders",
                     {
-                        headers: { Authorization: `Bearer ${localStorage.getItem('zyppyy-token')}` },
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}`,
+                        },
                     }
                 );
-                setOrders(data.orders);
+                setOrders(data.orders || []);
             } catch (error) {
-                console.error("Error fetching orders:", error);
+                console.error("Error fetching orders:", error.response?.data || error.message);
             }
         };
 
         fetchOrders();
-    }, [user, token]);
+    }, []);
 
     const updateStatus = async (orderId, newStatus) => {
         try {
             const { data } = await axios.put(
-                `http://localhost:5000/orders/${orderId}`,
+                `http://localhost:5000/api/orders/${orderId}`,
                 { status: newStatus },
-                { headers: { Authorization: `Bearer ${token}` } }
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}`,
+                    },
+                }
             );
 
             setOrders((prevOrders) =>
@@ -41,31 +44,40 @@ const ManageOrders = () => {
                 )
             );
         } catch (error) {
-            console.error("Error updating status:", error);
+            console.error("Error updating status:", error.response?.data || error.message);
         }
     };
 
     return (
-        <div className="page-container">
-            <h2>📦 Manage Orders</h2>
+        <div className="orders-container">
+            <h2 className="orders-title">📦 Manage Orders</h2>
+
             {orders.length === 0 ? (
-                <p>No orders found.</p>
+                <p className="no-orders">No orders found.</p>
             ) : (
-                <ul>
+                <ul className="orders-list">
                     {orders.map((order) => (
-                        <li key={order._id}>
-                            <strong>{order.user}</strong> - {order.status} - ₹{order.amount}
-                            {user.isAdmin && (
-                                <button
-                                    onClick={() =>
-                                        updateStatus(
-                                            order._id,
-                                            order.status === "Processing" ? "Delivered" : "Processing"
-                                        )
-                                    }
-                                >
-                                    Update Status
-                                </button>
+                        <li key={order._id} className="order-item">
+                            <p><strong>Order ID:</strong> {order._id}</p>
+                            <p><strong>User:</strong> {order.user?.name || order.address.email}</p>
+                            <p><strong>Amount:</strong> ₹{order.amount}</p>
+
+                            {user?.role === 'admin' ? (
+                                <div className="status-dropdown">
+                                    <label><strong>Status: </strong></label>
+                                    <select
+                                        value={order.status}
+                                        onChange={(e) => updateStatus(order._id, e.target.value)}
+                                    >
+                                        <option value="Processing">Processing</option>
+                                        <option value="Shipped">Shipped</option>
+                                        <option value="Out for Delivery">Out for Delivery</option>
+                                        <option value="Delivered">Delivered</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                </div>
+                            ) : (
+                                <p><strong>Status:</strong> {order.status}</p>
                             )}
                         </li>
                     ))}

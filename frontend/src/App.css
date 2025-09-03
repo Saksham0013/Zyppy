@@ -1658,26 +1658,26 @@ button:hover {
 
 /* 🎨 Status Colors */
 .status-dropdown select option[value="Delivered"] {
-  background: #28a745;
+  background: #000000;
   color: #fff;
 }
 
 .status-dropdown select option[value="Processing"] {
-  background: #ffc107;
-  color: #000;
+  background: #000000;
+  color: #fff;
 }
 
 .status-dropdown select option[value="Shipped"] {
-  background: #17a2b8;
+  background: #000000;
   color: #fff;
 }
 
 .status-dropdown select option[value="Out for Delivery"] {
-  background: #007bff;
+  background: #000000;
   color: #fff;
 }
 
 .status-dropdown select option[value="Cancelled"] {
-  background: #dc3545;
+  background: #000000;
   color: #fff;
 }
