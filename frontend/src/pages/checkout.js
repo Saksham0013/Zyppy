@@ -17,7 +17,6 @@ const CheckoutForm = ({ amount, method, items, user }) => {
       return;
     }
 
-    // ✅ COD Order
     if (method === "cod") {
       try {
         const orderRes = await axios.post(
