@@ -20,7 +20,7 @@ const CheckoutForm = ({ amount, method, items, user }) => {
     if (method === "cod") {
       try {
         const orderRes = await axios.post(
-          "http://localhost:5000/api/orders",
+          "https://zyppy.onrender.com/api/orders",
           {
             user,
             items,

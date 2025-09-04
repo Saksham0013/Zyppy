@@ -14,7 +14,7 @@ const EditProduct = () => {
     const [file, setFile] = useState(null); 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/products/${id}`)
+        fetch(`https://zyppy.onrender.com/api/products/${id}`)
             .then((res) => res.json())
             .then((data) => setProduct(data))
             .catch((err) => console.error("Error fetching product:", err));
@@ -41,7 +41,7 @@ const EditProduct = () => {
                 formData.append("image", file); 
             }
 
-            await fetch(`http://localhost:5000/api/products/${id}`, {
+            await fetch(`https://zyppy.onrender.com/api/products/${id}`, {
                 method: "PUT",
                 body: formData, 
             });
