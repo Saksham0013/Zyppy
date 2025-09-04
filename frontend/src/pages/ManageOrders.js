@@ -5,18 +5,15 @@ import { AuthContext } from "../context/AuthContext";
 const ManageOrders = () => {
     const [orders, setOrders] = useState([]);
     const { user } = useContext(AuthContext);
-    console.log(user)
+
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const { data } = await axios.get(
-                    "http://localhost:5000/api/orders",
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}`,
-                        },
-                    }
-                );
+                const { data } = await axios.get("http://localhost:5000/api/orders", {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}`,
+                    },
+                });
                 setOrders(data.orders || []);
             } catch (error) {
                 console.error("Error fetching orders:", error.response?.data || error.message);
@@ -58,11 +55,33 @@ const ManageOrders = () => {
                 <ul className="orders-list">
                     {orders.map((order) => (
                         <li key={order._id} className="order-item">
-                            <p><strong>Order ID:</strong> {order._id}</p>
-                            <p><strong>User:</strong> {order.user?.name || order.address.email}</p>
+                            <div className="order-header">
+                                <p><strong>Order ID:</strong> {order._id}</p>
+                                <p><strong>User:</strong> {order.user?.name || order.address.email}</p>
+                            </div>
                             <p><strong>Amount:</strong> ₹{order.amount}</p>
 
-                            {user?.role === 'admin' ? (
+                            <div className="order-products">
+                                <h4>Items:</h4>
+                                {order.items?.map((item, idx) => (
+                                    <div key={idx} className="order-product">
+                                        {item.image && (
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="order-product-img"
+                                            />
+                                        )}
+                                        <div>
+                                            <p><strong>{item.name}</strong></p>
+                                            <p>Qty: {item.quantity}</p>
+                                            <p>₹{item.price}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {user?.role === "admin" ? ( 
                                 <div className="status-dropdown">
                                     <label><strong>Status: </strong></label>
                                     <select

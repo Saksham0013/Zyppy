@@ -1596,88 +1596,200 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/*Order*/
-
+/* ========== ORDERS PAGE CONTAINER ========== */
 .orders-container {
+  max-width: 900px;
+  margin: 30px auto;
   padding: 20px;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #fff;
 }
 
 .orders-title {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #222;
+  border-bottom: 2px solid #f1f1f1;
+  padding-bottom: 10px;
 }
 
 .no-orders {
-  color: #666;
+  color: #555;
   font-style: italic;
+  text-align: center;
+  margin-top: 40px;
 }
 
+/* ========== ORDER LIST ========== */
 .orders-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .order-item {
-  margin: 10px 0;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
   background: #fafafa;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .order-item:hover {
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* 🔥 Status Dropdown */
+/* Header section with Order ID + User ID */
+.order-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.order-header p {
+  margin: 4px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Info rows */
+.order-item p {
+  margin: 6px 10px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.order-item strong {
+  color: #111;
+}
+
+/* ========== ORDER PRODUCTS ========== */
+.order-products {
+  margin-top: 15px;
+}
+
+.order-products h4 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.order-product {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.order-product:hover {
+  background: #f9f9f9;
+}
+
+.order-product-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-right: 15px;
+  background: #fff;
+  padding: 5px;
+}
+
+.order-product p {
+  margin: 3px 0;
+  font-size: 0.9rem;
+}
+
+/* .cancel-btn {
+  margin-top: 5px;
+  padding: 6px 12px;
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #d9363e;
+}
+
+.cancel-btn:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+} */
+
+/* ========== STATUS BADGES ========== */
+.order-item p strong+span,
+.order-status-badge {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.status-processing {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-shipped {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.status-out {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-delivered {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-cancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
 .status-dropdown {
-  margin-top: 10px;
+  margin-left: 30px;
 }
 
 .status-dropdown label {
   font-weight: bold;
-  margin-right: 8px;
+  margin-right: 10px;
+  font-size: 1rem;
 }
 
 .status-dropdown select {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 0.9rem;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 1rem;
+  min-width: 180px;
   cursor: pointer;
   outline: none;
+  background: #fff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .status-dropdown select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
-}
-
-/* 🎨 Status Colors */
-.status-dropdown select option[value="Delivered"] {
-  background: #000000;
-  color: #fff;
-}
-
-.status-dropdown select option[value="Processing"] {
-  background: #000000;
-  color: #fff;
-}
-
-.status-dropdown select option[value="Shipped"] {
-  background: #000000;
-  color: #fff;
-}
-
-.status-dropdown select option[value="Out for Delivery"] {
-  background: #000000;
-  color: #fff;
-}
-
-.status-dropdown select option[value="Cancelled"] {
-  background: #000000;
-  color: #fff;
+  border-color: #2874f0;
+  box-shadow: 0 0 6px rgba(40, 116, 240, 0.4);
 }

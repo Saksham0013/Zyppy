@@ -9,7 +9,7 @@ const CheckoutForm = ({ amount, method, items, user }) => {
     e.preventDefault();
 
     const address = JSON.parse(localStorage.getItem("zyppyy-address"));
-    const token = localStorage.getItem("zyppyy-token"); 
+    const token = localStorage.getItem("zyppyy-token");
 
     if (!token) {
       alert("Session expired, please login again");
@@ -31,10 +31,12 @@ const CheckoutForm = ({ amount, method, items, user }) => {
           },
           {
             headers: {
-              Authorization: `Bearer ${token}`, 
+              Authorization: `Bearer ${token}`,
             },
           }
         );
+
+        localStorage.removeItem("zyppyy-cart");
 
         navigate("/success", {
           state: {

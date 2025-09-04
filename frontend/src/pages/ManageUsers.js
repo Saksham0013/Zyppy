@@ -10,7 +10,7 @@ const ManageUsers = () => {
         const fetchUsers = async () => {
             try {
                 const { data } = await axios.get("http://localhost:5000/api/users", {
-                    headers: { Authorization: `Bearer ${localStorage.getItem('zyppyy-token')}` },
+                    headers: { Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}` },
                 });
                 setUsers(data);
             } catch (error) {
@@ -18,20 +18,23 @@ const ManageUsers = () => {
             }
         };
 
-        if (user?.role === "admin") {
+        if (user?.role === "admin" || user?.isSuperAdmin) {
             fetchUsers();
         }
     }, [user, token]);
 
     const changeRole = async (userId, newRole) => {
         try {
-            await axios.put(
+            const { data } = await axios.put(
                 `http://localhost:5000/api/users/${userId}/role`,
                 { role: newRole },
-                { headers: { Authorization: `Bearer ${localStorage.getItem('zyppyy-token')}` } }
+                {
+                    headers: { Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}` },
+                }
             );
+
             setUsers((prev) =>
-                prev.map((u) => (u._id === userId ? { ...u, role: newRole } : u))
+                prev.map((u) => (u._id === userId ? { ...u, role: data.role } : u))
             );
         } catch (error) {
             console.error("Error changing role:", error.response?.data || error.message);
@@ -41,7 +44,7 @@ const ManageUsers = () => {
     const deleteUser = async (userId) => {
         try {
             await axios.delete(`http://localhost:5000/api/users/${userId}`, {
-                headers: { Authorization: `Bearer ${localStorage.getItem('zyppyy-token')}` },
+                headers: { Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}` },
             });
             setUsers((prev) => prev.filter((u) => u._id !== userId));
         } catch (error) {
@@ -59,12 +62,20 @@ const ManageUsers = () => {
                     {users.map((u) => (
                         <li key={u._id}>
                             <strong>{u.name}</strong> - {u.role}{" "}
-                            <button
-                                onClick={() => changeRole(u._id, u.role === "user" ? "admin" : "user")}
-                            >
-                                Change Role
-                            </button>{" "}
-                            <button onClick={() => deleteUser(u._id)}>Delete</button>
+                            {u.isSuperAdmin ? (
+                                <span> 🔒 Super Admin</span>
+                            ) : (
+                                <>
+                                    <button
+                                        onClick={() =>
+                                            changeRole(u._id, u.role === "user" ? "admin" : "user")
+                                        }
+                                    >
+                                        Change Role
+                                    </button>{" "}
+                                    <button onClick={() => deleteUser(u._id)}>Delete</button>
+                                </>
+                            )}
                         </li>
                     ))}
                 </ul>

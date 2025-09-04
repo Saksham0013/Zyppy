@@ -38,15 +38,17 @@ const Header = () => {
 
       <nav>
         <Link to="/">Home</Link>
+
         <Link to="/cart">
           🛒 Cart {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}
         </Link>
+
+        {user && <Link to="/my-orders">My Orders</Link>}
 
         {user ? (
           <>
             {/* {user.role === "user" && <Link to="/dashboard">My Dashboard</Link>} */}
             {user.role === "admin" && <Link to="/admin">Admin Dashboard</Link>}
-
             <Link to="/profile">My Profile</Link>
             <button onClick={logout} className="logout-btn">Logout</button>
           </>
@@ -62,3 +64,8 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
+

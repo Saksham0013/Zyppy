@@ -8,10 +8,11 @@ const orderSchema = new mongoose.Schema(
         },
         items: [
             {
-                // _id: false,
+                _id: false,
                 name: { type: String, required: true },
                 quantity: { type: Number, required: true },
                 price: { type: Number, required: true },
+                image: { type: String },
             },
         ],
         amount: {
