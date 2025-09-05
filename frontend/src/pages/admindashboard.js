@@ -5,8 +5,8 @@ const AdminDashboard = () => {
   const user = JSON.parse(localStorage.getItem("zyppyy-user"));
 
   return (
-    <div className="dashboard-container">
-      <div className="dashboard-card">
+    <div className="admin-dashboard-container">
+      <div className="admin-dashboard-card">
         <h1>👨‍💻 Admin Dashboard</h1>
         <p className="user-info"><strong>Welcome:</strong> {user?.name}</p>
         <p className="user-info"><strong>Email:</strong> {user?.email}</p>
