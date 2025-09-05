@@ -4,6 +4,7 @@ import { addToCart } from "../utils/cartUtils";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([]); 
 
   const API_URL =
     process.env.REACT_APP_API_URL ||
@@ -30,7 +31,7 @@ const Home = () => {
           _id: p._id,
           name: p.name,
           price: p.price,
-          image: `${API_URL}${p.image}`, 
+          image: `${API_URL}${p.image}`,
         }));
 
         setProducts([...formattedDB, ...formattedDummy]);
@@ -42,12 +43,22 @@ const Home = () => {
     fetchProducts();
   }, [API_URL]);
 
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setCartItems((prev) => [...prev, product._id]); 
+  };
+
   return (
     <div className="home-page">
       <h2>All Products</h2>
       <div className="product-list">
         {products.map((p) => (
-          <ProductCard key={p._id} product={p} onAddToCart={addToCart} />
+          <ProductCard
+            key={p._id}
+            product={p}
+            onAddToCart={handleAddToCart}
+            isInCart={cartItems.includes(p._id)} 
+          />
         ))}
       </div>
     </div>
@@ -55,6 +66,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
