@@ -34,7 +34,7 @@ const AddProduct = () => {
             data.append("stock", formData.stock);
             data.append("image", image);
 
-            const res = await axios.post("https://zyppy.onrender.com/api/products", data, {
+            const res = await axios.post("http://localhost:5000/api/products", data, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 

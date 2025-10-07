@@ -36,7 +36,7 @@ const getUserProfile = async () => {
 
   if (!token) throw new Error("No token found");
 
-  const res = await fetch("https://zyppy.onrender.com/api/auth/me", {
+  const res = await fetch("http://localhost:5000/api/auth/me", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
