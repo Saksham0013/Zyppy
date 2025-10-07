@@ -9,7 +9,7 @@ const Home = () => {
   const API_URL =
     process.env.REACT_APP_API_URL ||
     process.env.VITE_API_URL ||
-    "https://zyppy.onrender.comhttps://zyppy.onrender.com";
+    "https://zyppy.onrender.com";
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -205,7 +205,7 @@ export default Home;
 //   const API_URL =
 //     process.env.REACT_APP_API_URL ||
 //     process.env.VITE_API_URL ||
-//     "https://zyppy.onrender.comhttps://zyppy.onrender.com";
+//     "https://zyppy.onrender.com";
 
 //   useEffect(() => {
 //     const fetchProducts = async () => {

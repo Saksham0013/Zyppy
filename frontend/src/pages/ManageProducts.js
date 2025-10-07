@@ -5,7 +5,7 @@ const ManageProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch("https://zyppy.onrender.comhttps://zyppy.onrender.com/api/products")
+        fetch("https://zyppy.onrender.com/api/products")
             .then((res) => res.json())
             .then((data) => setProducts(data))
             .catch((err) => console.error("Error fetching products:", err));
@@ -14,7 +14,7 @@ const ManageProducts = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this product?")) {
             try {
-                await fetch(`https://zyppy.onrender.comhttps://zyppy.onrender.com/api/products/${id}`, {
+                await fetch(`https://zyppy.onrender.com/api/products/${id}`, {
                     method: "DELETE",
                 });
                 setProducts(products.filter((p) => p._id !== id));
@@ -45,7 +45,7 @@ const ManageProducts = () => {
                                 <tr key={product._id}>
                                     <td>
                                         <img
-                                            src={`https://zyppy.onrender.comhttps://zyppy.onrender.com${product.image}`}
+                                            src={`https://zyppy.onrender.com${product.image}`}
                                             alt={product.name}
                                             className="manage-products__image"
                                         />

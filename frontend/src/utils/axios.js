@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-    baseURL: "https://zyppy.onrender.comhttps://zyppy.onrender.com",
+    baseURL: "https://zyppy.onrender.com",
 });
 
 axiosInstance.interceptors.request.use((config) => {

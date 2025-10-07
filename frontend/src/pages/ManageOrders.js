@@ -9,7 +9,7 @@ const ManageOrders = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const { data } = await axios.get("https://zyppy.onrender.comhttps://zyppy.onrender.com/api/orders", {
+                const { data } = await axios.get("https://zyppy.onrender.com/api/orders", {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}`,
                     },
@@ -26,7 +26,7 @@ const ManageOrders = () => {
     const updateStatus = async (orderId, newStatus) => {
         try {
             const { data } = await axios.put(
-                `https://zyppy.onrender.comhttps://zyppy.onrender.com/api/orders/${orderId}`,
+                `https://zyppy.onrender.com/api/orders/${orderId}`,
                 { status: newStatus },
                 {
                     headers: {

@@ -9,7 +9,7 @@ const ManageUsers = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const { data } = await axios.get("https://zyppy.onrender.comhttps://zyppy.onrender.com/api/users", {
+                const { data } = await axios.get("https://zyppy.onrender.com/api/users", {
                     headers: { Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}` },
                 });
                 setUsers(data);
@@ -26,7 +26,7 @@ const ManageUsers = () => {
     const changeRole = async (userId, newRole) => {
         try {
             const { data } = await axios.put(
-                `https://zyppy.onrender.comhttps://zyppy.onrender.com/api/users/${userId}/role`,
+                `https://zyppy.onrender.com/api/users/${userId}/role`,
                 { role: newRole },
                 {
                     headers: { Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}` },
@@ -43,7 +43,7 @@ const ManageUsers = () => {
 
     const deleteUser = async (userId) => {
         try {
-            await axios.delete(`https://zyppy.onrender.comhttps://zyppy.onrender.com/api/users/${userId}`, {
+            await axios.delete(`https://zyppy.onrender.com/api/users/${userId}`, {
                 headers: { Authorization: `Bearer ${localStorage.getItem("zyppyy-token")}` },
             });
             setUsers((prev) => prev.filter((u) => u._id !== userId));
