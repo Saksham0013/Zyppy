@@ -18,7 +18,15 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="product-card">
-      <img src={product.image} alt={product.name} width={150} />
+      <img
+        src={
+          product.image.startsWith("http")
+            ? product.image
+            : `https://zyppy.onrender.com${product.image}`
+        }
+        alt={product.name}
+        width={150}
+      />
       <h3 className="product-name">{product.name}</h3>
       <p className="product-price">₹{product.price}</p>
       <button onClick={handleAddToCart} disabled={isInCart}>
