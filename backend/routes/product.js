@@ -50,3 +50,5 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "Failed to add product" });
   }
 });
+
+module.exports = router;
