@@ -31,7 +31,7 @@ const Home = () => {
           _id: p._id,
           name: p.name,
           price: p.price,
-          image: `${API_URL}${p.image}`,
+          image: p.image,
         }));
 
         setProducts([...formattedDB, ...formattedDummy]);
