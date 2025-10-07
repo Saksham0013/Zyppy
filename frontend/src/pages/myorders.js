@@ -18,7 +18,7 @@ const MyOrders = () => {
 
     const fetchOrders = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/orders/user", {
+        const res = await axios.get("https://zyppy.onrender.comhttps://zyppy.onrender.com/api/orders/user", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
