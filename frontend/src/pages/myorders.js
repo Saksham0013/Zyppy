@@ -24,7 +24,7 @@ const MyOrders = () => {
           },
         });
 
-        setOrders(res.data.orders || []); 
+        setOrders(res.data.orders || []);
       } catch (err) {
         console.error("Error fetching orders:", err.response?.data || err.message);
       } finally {
@@ -63,8 +63,17 @@ const MyOrders = () => {
                 {order.items?.map((item, idx) => (
                   <div key={idx} className="order-product">
                     {item.image && (
+                      // <img
+                      //   src={item.image}
+                      //   alt={item.name}
+                      //   className="order-product-img"
+                      // />
                       <img
-                        src={item.image}
+                        src={
+                          item.image.startsWith("http")
+                            ? item.image
+                            : `https://zyppy.onrender.com${item.image}`
+                        }
                         alt={item.name}
                         className="order-product-img"
                       />

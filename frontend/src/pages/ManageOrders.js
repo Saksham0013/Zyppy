@@ -66,11 +66,20 @@ const ManageOrders = () => {
                                 {order.items?.map((item, idx) => (
                                     <div key={idx} className="order-product">
                                         {item.image && (
+                                            // <img
+                                            //     src={item.image}
+                                            //     alt={item.name}
+                                            //     className="order-product-img"
+                                            // />
                                             <img
-                                                src={item.image}
-                                                alt={item.name}
-                                                className="order-product-img"
-                                            />
+                                            src={
+                                                item.image.startsWith("http")
+                                                    ? item.image
+                                                    : `https://zyppy.onrender.com${item.image}`
+                                            }
+                                            alt={item.name}
+                                            className="order-product-img"
+                                        />
                                         )}
                                         <div>
                                             <p><strong>{item.name}</strong></p>
@@ -81,7 +90,7 @@ const ManageOrders = () => {
                                 ))}
                             </div>
 
-                            {user?.role === "admin" ? ( 
+                            {user?.role === "admin" ? (
                                 <div className="status-dropdown">
                                     <label><strong>Status: </strong></label>
                                     <select
