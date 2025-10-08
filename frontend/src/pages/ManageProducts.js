@@ -44,8 +44,17 @@ const ManageProducts = () => {
                             products.map((product) => (
                                 <tr key={product._id}>
                                     <td>
-                                        <img
+                                        {/* <img
                                             src={`https://zyppy.onrender.com${product.image}`}
+                                            alt={product.name}
+                                            className="manage-products__image"
+                                        /> */}
+                                        <img
+                                            src={
+                                                product.image.startsWith("http")
+                                                    ? product.image
+                                                    : `https://zyppy.onrender.com${product.image}`
+                                            }
                                             alt={product.name}
                                             className="manage-products__image"
                                         />
