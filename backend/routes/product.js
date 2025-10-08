@@ -19,7 +19,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: "zyppy_uploads",
     // allowed_formats: ["auto"],
-    allowed_formats: ["jpg", "png", "jpe"],
+    // allowed_formats: ["jpg", "png", "jpe"],
   },
 });
 
